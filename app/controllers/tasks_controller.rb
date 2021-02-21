@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   def index
+    if logged_in?
       @tasks = Task.all
+    else
+      redirect_to :login
+    end
   end
 
   def show
