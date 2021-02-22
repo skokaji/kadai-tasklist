@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :redirect_root
+  before_action :require_user_logged_in
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
   
   def index
@@ -7,7 +7,6 @@ class TasksController < ApplicationController
   end
   
   def show
-    @task
   end
 
   def new
@@ -27,7 +26,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task
   end
 
   def update
@@ -48,10 +46,6 @@ class TasksController < ApplicationController
   end
   
   private
-  
-  def redirect_root
-    redirect_to :login unless logged_in?
-  end
   
   def task_params
     params.require(:task).permit(:content, :status)
